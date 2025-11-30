@@ -2,8 +2,8 @@ const particleCount = 700;
 const particlePropCount = 9;
 const particlePropsLength = particleCount * particlePropCount;
 const rangeY = 100;
-const baseTTL = 50;
-const rangeTTL = 150;
+const baseTime = 50;
+const rangeTime = 150;
 const baseSpeed = 0.1;
 const rangeSpeed = 2;
 const baseRadius = 1;
@@ -85,7 +85,7 @@ function initParticle(i) {
     const x = rand(canvas.a.width);
     const y = center[1] + randRange(rangeY);
     const vx = 0, vy = 0, life = 0;
-    const ttl = baseTTL + rand(rangeTTL);
+    const ttl = baseTime + rand(rangeTime);
     const speed = baseSpeed + rand(rangeSpeed);
     const radius = baseRadius + rand(rangeRadius);
     const hue = baseHue + rand(rangeHue);
@@ -181,27 +181,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function type() {
         const currentPhrase = phrases[phraseIndex];
-        if (isDeleting) {
+        if (isDeleting) 
+        {
             textElement.textContent = currentPhrase.substring(0, charIndex - 1);
             charIndex--;
             typeSpeed = 50;
-        } else {
+        } 
+        else 
+        {
             textElement.textContent = currentPhrase.substring(0, charIndex + 1);
             charIndex++;
             typeSpeed = 100;
         }
-        if (!isDeleting && charIndex === currentPhrase.length) {
+        if (!isDeleting && charIndex === currentPhrase.length) 
+        {
             typeSpeed = 2000;
             isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
+        } 
+        else if (isDeleting && charIndex === 0) 
+        {
             isDeleting = false;
             phraseIndex++;
             typeSpeed = 500;
-            if (phraseIndex === phrases.length) { phraseIndex = 0; }
+            if (phraseIndex === phrases.length) 
+            { 
+                phraseIndex = 0; 
+            }
         }
         setTimeout(type, typeSpeed);
     }
-    if (textElement) type();
+
+    if (textElement) 
+    {
+        type();
+    }
 
     const hamburger = document.querySelector('.hamburger');
     const navLinksContainer = document.querySelector('.nav-links');
@@ -218,13 +231,16 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('href');
-            if (targetId && targetId !== '#') {
+            if (targetId && targetId !== '#') 
+            {
                 const targetSection = document.querySelector(targetId);
-                if (targetSection) {
+                if (targetSection) 
+                {
                     targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
             }
-            if (navLinksContainer && navLinksContainer.classList.contains('active')) {
+            if (navLinksContainer && navLinksContainer.classList.contains('active')) 
+            {
                 navLinksContainer.classList.remove('active');
                 hamburger.classList.remove('active');
             }
@@ -233,11 +249,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get('status');
-    if (status === 'success') {
-        alert("Message envoyé avec succès !");
+    if (status === 'success') 
+    {
+        alert("Message sent successfully!");
         window.history.replaceState({}, document.title, window.location.pathname);
-    } else if (status === 'error') alert("Erreur : Veuillez remplir tous les champs.");
-    else if (status === 'server_error') alert("Erreur serveur : L'envoi a échoué.");
+    } 
+    else if (status === 'error') 
+    {
+        alert("Error: Please fill in all fields.");
+    }
+    else if (status === 'server_error') 
+    {
+        alert("Server error: Sending failed.");
+    }
 
     const filterButtons = document.querySelectorAll('#project-filters button');
     const projectCards = document.querySelectorAll('.project-card');
@@ -252,20 +276,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const filter = btn.getAttribute('data-filter');
 
-                if (filter === 'all') {
+                if (filter === 'all') 
+                {
                     activeFilters.clear();
 
                     filterButtons.forEach(b => b.classList.remove('active'));
 
                     allButton.classList.add('active');
                 } 
-                else {
+                else 
+                {
                     allButton.classList.remove('active');
 
-                    if (activeFilters.has(filter)) {
+                    if (activeFilters.has(filter)) 
+                    {
                         activeFilters.delete(filter);
                         btn.classList.remove('active');
-                    } else {
+                    } 
+                    else 
+                    {
                         activeFilters.add(filter);
                         btn.classList.add('active');
                     }
@@ -291,16 +320,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const show = activeFilters.size === 0 || [...activeFilters].every(f => tags.includes(f.toLowerCase()));
 
-                    card.style.display = show ? "flex" : "none";
+                    if (show) 
+                    {
+                        card.style.display = "flex"
+                    }
+                    else
+                    {
+                        card.style.display = "none"
+                    }
                 });
             });
         });
     }
 
     const techcarousel = document.getElementById("carousel-tech");
-    if (techcarousel) {
+    if (techcarousel) 
+    {
         const children = Array.from(techcarousel.children);
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 4; i++) 
+        {
             children.forEach(child => {
                 const clone = child.cloneNode(true);
                 clone.setAttribute('aria-hidden', 'true');
@@ -310,11 +348,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const backToTopBtn = document.getElementById('back-to-top');
-    if (backToTopBtn) {
+    if (backToTopBtn) 
+    {
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
+            if (window.scrollY > 300) 
+            {
                 backToTopBtn.classList.add('visible');
-            } else {
+            } 
+            else 
+            {
                 backToTopBtn.classList.remove('visible');
             }
         });
@@ -330,64 +372,80 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxCaption = document.getElementById('lightbox-caption'); // NOUVEAU
+    const lightboxCaption = document.getElementById('lightbox-caption'); 
     const closeBtn = document.querySelector('.close-lightbox');
     const prevBtn = document.querySelector('.lightbox-prev');
     const nextBtn = document.querySelector('.lightbox-next');
     const counter = document.getElementById('lightbox-counter');
     
     let currentImages = [];
-    let currentCaptions = []; // NOUVEAU : Tableau pour les textes
+    let currentCaptions = [];
     let currentIndex = 0;
 
-    // Met à jour l'image et le texte
     function updateLightboxImage() {
         lightboxImg.style.opacity = 0;
         
-        // Controllo di sicurezza: se esiste la didascalia, nascondila
-        if(lightboxCaption) lightboxCaption.style.opacity = 0;
+        if(lightboxCaption)     
+        {
+            lightboxCaption.style.opacity = 0;
+        }
 
         setTimeout(() => {
-            if (currentImages.length > 0) {
+            if (currentImages.length > 0) 
+            {
                 lightboxImg.src = currentImages[currentIndex];
-                
-                // --- BLOCCO CORRETTO E SICURO ---
-                // Eseguiamo il codice solo se l'elemento HTML esiste
-                if (lightboxCaption) {
-                    if (currentCaptions.length > currentIndex && currentCaptions[currentIndex]) {
+
+                if (lightboxCaption) 
+                {
+                    if (currentCaptions.length > currentIndex && currentCaptions[currentIndex]) 
+                    {
                         lightboxCaption.textContent = currentCaptions[currentIndex];
                         lightboxCaption.style.display = 'block';
-                    } else {
+                    } 
+                    else 
+                    {
                         lightboxCaption.textContent = "";
                         lightboxCaption.style.display = 'none';
                     }
                 }
-                // -------------------------------
 
-                if (counter) {
+                if (counter) 
+                {
                     counter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
                 }
                 
-                // Ora rendiamo visibile l'immagine (questo non si bloccherà più)
                 lightboxImg.style.opacity = 1;
                 
-                if(lightboxCaption) lightboxCaption.style.opacity = 1;
+                if(lightboxCaption) 
+                {
+                    lightboxCaption.style.opacity = 1;
+                }
             }
         }, 200);
     }
 
     function openLightbox(imagesArray, captionsArray) {
         currentImages = imagesArray;
-        currentCaptions = captionsArray || []; // Récupère les légendes ou tableau vide
-        currentIndex = 0;
+        if (captionsArray)
+        {
+            currentCaptions = captionsArray;
+            currentIndex = 0;
+        }
+        else
+        {
+            currentCaptions = [];
+            currentIndex = 0;
+        }
         
-        // Gestion visibilité des flèches s'il n'y a qu'une image
-        if (currentImages.length <= 1) {
+        if (currentImages.length <= 1) 
+        {
             prevBtn.style.display = 'none';
             nextBtn.style.display = 'none';
             counter.style.display = 'none';
-        } else {
-            prevBtn.style.display = 'flex'; // Flex pour centrer l'icone
+        } 
+        else 
+        {
+            prevBtn.style.display = 'flex'; 
             nextBtn.style.display = 'flex';
             counter.style.display = 'block';
         }
@@ -397,29 +455,30 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = 'hidden';
     }
 
-    function closeLightboxFunc() {
+    function closeLightboxFunc() 
+    {
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
         setTimeout(() => { lightboxImg.src = ''; }, 300);
     }
 
-    // Event Listener : Click sur une Card
     projectCards.forEach(card => {
         card.addEventListener('click', (e) => {
-            if (e.target.closest('a')) return; // Ignore les liens
+            if (e.target.closest('a')) 
+            {
+                return; 
+            }
 
-            // 1. Récupérer les images
             const imagesAttr = card.getAttribute('data-images');
-            
-            // 2. Récupérer les légendes (captions)
             const captionsAttr = card.getAttribute('data-captions');
 
-            if (imagesAttr) {
+            if (imagesAttr) 
+            {
                 const imagesList = imagesAttr.split(',').map(img => img.trim());
-                
-                // Transforme la chaîne de légendes en tableau (si elle existe)
                 let captionsList = [];
-                if (captionsAttr) {
+
+                if (captionsAttr) 
+                {
                     captionsList = captionsAttr.split('/').map(cap => cap.trim());
                 }
 
@@ -430,17 +489,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ... (Le reste du code pour les boutons close/next/prev reste identique) ...
-    // Assure-toi juste que les boutons appellent updateLightboxImage()
-    if (closeBtn) closeBtn.addEventListener('click', closeLightboxFunc);
-    
-    if (lightbox) {
+    if (closeBtn) 
+    {
+        closeBtn.addEventListener('click', closeLightboxFunc);
+    }
+
+    if (lightbox) 
+    {
         lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightboxFunc();
+            if (e.target === lightbox) 
+            {
+                closeLightboxFunc();
+            }
         });
     }
 
-    if (nextBtn) {
+    if (nextBtn) 
+    {
         nextBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             currentIndex = (currentIndex + 1) % currentImages.length;
@@ -448,7 +513,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (prevBtn) {
+    if (prevBtn) 
+    {
         prevBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;

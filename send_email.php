@@ -1,37 +1,41 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $mon_email_etudiant = "mohamed.arfaoui@etu.univ-smb.fr"; 
-    $destinataire = "mohamed.arfaoui@etu.univ-smb.fr";
+        $my_student_email = "mohamed.arfaoui@etu.univ-smb.fr"; 
+        $recipient = "mohamed.arfaoui@etu.univ-smb.fr, arfaoumo@iut-acy.univ-smb.fr, yassin.arfaouii@gmail.com";
 
-    $nom = strip_tags(trim($_POST["name"]));
-    $email_visiteur = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
-    $message = trim($_POST["message"]);
+        $name = strip_tags(trim($_POST["name"]));
+        $visitor_email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+        $message = trim($_POST["message"]);
 
-    if (empty($nom) OR empty($message) OR !filter_var($email_visiteur, FILTER_VALIDATE_EMAIL)) {
-        header("Location: index.html?status=error#contact");
-        exit;
+        if (empty($name) OR empty($message) OR !filter_var($visitor_email, FILTER_VALIDATE_EMAIL)) 
+        {
+            header("Location: index.html?status=error#contact");
+            exit;
+        }
+
+        $subject = "Portfolio: Message from $name";
+
+        $email_content = "Name: $name\n";
+        $email_content .= "Contact email: $visitor_email\n";
+        $email_content .= "-------------------------\n";
+        $email_content .= "Message:\n$message\n";
+
+        $headers = "From: $my_student_email\r\n";
+        $headers .= "Reply-To: $visitor_email\r\n";
+
+        if (mail($recipient, $subject, $email_content, $headers, "-f" . $my_student_email)) 
+        {
+            header("Location: index.html?status=success#contact");
+        } 
+        else 
+        {
+            header("Location: index.html?status=server_error#contact");
+        }
+
+    } 
+    else 
+    {
+        header("Location: index.html");
     }
-
-    $sujet = "Portfolio : Message de $nom";
-
-    $contenu_email = "Nom : $nom\n";
-    $contenu_email .= "Email du contact : $email_visiteur\n";
-    $contenu_email .= "-------------------------\n";
-    $contenu_email .= "Message :\n$message\n";
-
-    $headers = "From: $mon_email_etudiant\r\n";
-    $headers .= "Reply-To: $email_visiteur\r\n";
-    $headers .= "X-Mailer: PHP/" . phpversion();
-
-    if (mail($destinataire, $sujet, $contenu_email, $headers, "-f" . $mon_email_etudiant)) {
-        header("Location: index.html?status=success#contact");
-    } else {
-        header("Location: index.html?status=server_error#contact");
-    }
-
-} 
-else {
-    header("Location: index.html");
-}
 ?>

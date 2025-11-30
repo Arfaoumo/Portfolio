@@ -1,6 +1,3 @@
-/* =========================================
-   1. VARIABLES ET STYLES GLOBAUX
-   ========================================= */
 :root {
     --bg-color: #121212;
     --surface-color: #1e1e1e;
@@ -36,16 +33,14 @@ body {
     padding: 0 2rem;
 }
 
-/* GESTIONE SPAZIATURA SEZIONI (Unificata) */
 section {
     padding: 6rem 0;
-    margin-bottom: 10rem; /* Spazio standard tra le sezioni */
+    margin-bottom: 10rem; 
     scroll-margin-top: 100px;
 }
 
-/* Eccezioni */
 section:last-of-type {
-    margin-bottom: 0; /* Niente spazio dopo l'ultima sezione */
+    margin-bottom: 0; 
 }
 
 #about {
@@ -97,9 +92,6 @@ main {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* =========================================
-   2. TYPOGRAPHIE & TITRES
-   ========================================= */
 h1, h3, h4 {
     color: var(--text-color);
     margin-bottom: 1rem;
@@ -157,9 +149,6 @@ a:hover { color: #66ccff; }
 
 ul { list-style: none; }
 
-/* =========================================
-   3. BOUTONS
-   ========================================= */
 .btn {
     display: inline-block;
     padding: 0.8rem 1.8rem;
@@ -201,9 +190,6 @@ ul { list-style: none; }
     letter-spacing: 0.5px;
 }
 
-/* =========================================
-   4. NAVBAR
-   ========================================= */
 .navbar {
     position: sticky;
     top: 0;
@@ -282,9 +268,6 @@ ul { list-style: none; }
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
-/* =========================================
-   5. HERO SECTION
-   ========================================= */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -378,10 +361,6 @@ ul { list-style: none; }
 .social-links a:first-child:hover { color: #00aaff; text-shadow: 0 0 20px rgba(0, 170, 255, 0.8); }
 .social-links a:last-child:hover { color: #ff00cc; text-shadow: 0 0 20px rgba(255, 0, 204, 0.8); }
 
-
-/* =========================================
-   6. ABOUT & SKILLS
-   ========================================= */
 .about-content {
     max-width: 800px;
     margin: 0 auto;
@@ -405,7 +384,6 @@ ul { list-style: none; }
     font-weight: 700;
 }
 
-/* --- CAROUSEL --- */
 .carousel-wrapper { width: 100%; overflow: hidden; position: relative; padding: 1rem 0; }
 .carousel { display: flex; gap: 3rem; align-items: center; width: max-content; margin-bottom: 3rem; }
 
@@ -449,9 +427,6 @@ ul { list-style: none; }
     100% { transform: translateX(-20%); }
 }
 
-/* =========================================
-   7. APPROACH SECTION
-   ========================================= */
 .approach-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -552,10 +527,7 @@ ul { list-style: none; }
 
 .approach-card:hover .corner { width: 25px; height: 25px; }
 
-/* =========================================
-   8. SECTION PROJETS
-   ========================================= */
-#projects { max-width: 1500px; margin: 0 auto; padding: 0 2rem 6rem 2rem; /* Padding bottom fix */ }
+#projects { max-width: 1500px; margin: 0 auto; padding: 0 2rem 6rem 2rem; }
 
 .project-filters {
     text-align: center;
@@ -665,9 +637,6 @@ ul { list-style: none; }
 .project-links a:first-child:hover { color: #00aaff; }
 .project-links a:last-child:hover { color: #ff00cc; }
 
-/* =========================================
-   9. PARCOURS (TIMELINE)
-   ========================================= */
 .timeline { display: flex; gap: 3rem; flex-wrap: wrap; }
 .timeline-item { flex: 1; min-width: 300px; }
 .timeline-item h3 { font-size: 1.8rem; color: #ffffff; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
@@ -692,9 +661,6 @@ ul { list-style: none; }
 .timeline-entry p { color: #aaa; font-style: italic; margin-bottom: 0.5rem; }
 .timeline-entry ul { list-style: disc; padding-left: 1.2rem; color: #bbb; }
 
-/* =========================================
-   10. CONTACT & FOOTER
-   ========================================= */
 #contact p { text-align: center; max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); }
 .contact-form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; }
 .form-group { margin-bottom: 1.5rem; }
@@ -728,9 +694,6 @@ ul { list-style: none; }
 }
 .footer p { color: #666; margin-bottom: 0; }
 
-/* =========================================
-   11. EXTRAS (BACK TO TOP & LIGHTBOX)
-   ========================================= */
 #back-to-top {
     position: fixed;
     bottom: 2rem;
@@ -752,7 +715,6 @@ ul { list-style: none; }
 #back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
 #back-to-top:hover { background: var(--primary-color); border-color: transparent; box-shadow: 0 0 20px var(--primary-color); transform: translateY(-5px); }
 
-/* Lightbox */
 .lightbox {
     position: fixed; z-index: 99999; top: 0; left: 0; width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
@@ -791,9 +753,6 @@ ul { list-style: none; }
 .lightbox-next { right: 20px; }
 #lightbox-counter { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 0.9rem; background: rgba(0,0,0,0.5); padding: 5px 15px; border-radius: 20px; }
 
-/* =========================================
-   12. RESPONSIVE
-   ========================================= */
 @media (max-width: 1024px) {
     .project-grid { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
 }
